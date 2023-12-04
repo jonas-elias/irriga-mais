@@ -1,0 +1,25 @@
+version: '3.1'
+name: irriga-mais
+services:
+  server:
+    build: ./
+    tty: true
+    stdin_open: true
+    restart: always
+    volumes:
+      - ./irriga_mais:/app
+    ports:
+      - '8080:8080'
+
+  prometheus:
+    image: prom/prometheus:v2.14.0
+    volumes:
+     - ./prometheus/:/etc/prometheus/
+    # command:
+    #   - 'config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - 9090:9090
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - 3000:3000
