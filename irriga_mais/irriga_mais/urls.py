@@ -16,8 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from irrigacao import urls as irrigacao_urls
+import django_prometheus.urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('irrigacao/', include(irrigacao_urls)),
+    path('', include(django_prometheus.urls)),
 ]

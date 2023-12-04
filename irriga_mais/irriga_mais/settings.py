@@ -25,7 +25,7 @@ SECRET_KEY = 'wkl7+o02$jk8un!wb3i5sw=p9ck2$dqqf&!ljro6)c$6=fr*&('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.3.217', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['192.168.3.217', 'localhost', '127.0.0.1', 'server']
 
 # APPEND_SLASH = False
 
@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # 'daphne',
 
     'irrigacao',
+    'django_prometheus',
     # 'rest_framework',
 ]
 
@@ -62,6 +63,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_prometheus.middleware.PrometheusBeforeMiddleware',
+    'django_prometheus.middleware.PrometheusAfterMiddleware',
 ]
 
 ROOT_URLCONF = 'irriga_mais.urls'
@@ -117,9 +120,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
