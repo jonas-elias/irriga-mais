@@ -1,6 +1,6 @@
-from rest_framework import generics
-from rest_framework.response import Response
-from rest_framework import status
+# from rest_framework import generics
+# from rest_framework.response import Response
+# from rest_framework import status
 from .models import Fazenda, PivoIrrigacao, EventoIrrigacao, TokenAuth
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
