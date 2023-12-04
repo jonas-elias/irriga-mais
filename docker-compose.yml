@@ -3,11 +3,10 @@ name: irriga-mais
 services:
   server:
     build: ./
-    tty: true
-    stdin_open: true
     restart: always
     volumes:
       - ./irriga_mais:/app
+    command: ["python3", "/app/manage.py", "runserver", "0.0.0.0:8080"]
     ports:
       - '8080:8080'
 
