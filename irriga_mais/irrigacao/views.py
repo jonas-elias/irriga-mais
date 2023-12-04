@@ -44,7 +44,7 @@ def createFazenda(request):
                                      senha=make_password(data['senha']),
                                      localizacao_latitude=data['latitude'],
                                      localizacao_longitude=data['longitude'])
-    return JsonResponse({'id': fazenda.id}, status=status.HTTP_201_CREATED)
+    return JsonResponse({'id': fazenda.id}, status=201)
 
 
 def loginFazenda(request):
@@ -56,11 +56,11 @@ def loginFazenda(request):
         if (check_password(data['senha'], fazenda[0]['senha'])):
             token = secrets.token_hex(100 // 2)
             TokenAuth.objects.create(token=token, data_expiracao=timezone.now() + timezone.timedelta(days=1))
-            return JsonResponse({'message': 'Autorizado!', 'token': token, 'id': fazenda[0]['id']}, status=status.HTTP_201_CREATED)
+            return JsonResponse({'message': 'Autorizado!', 'token': token, 'id': fazenda[0]['id']}, status=201)
         else:
-            return JsonResponse({'message': 'Senha incorreta!'}, status=status.HTTP_401_UNAUTHORIZED)
+            return JsonResponse({'message': 'Senha incorreta!'}, status=401)
     else:
-        return JsonResponse({'message': 'Não autorizado!'}, status=status.HTTP_401_UNAUTHORIZED)
+        return JsonResponse({'message': 'Não autorizado!'}, status=401)
 
 
 def createPivo(request):
@@ -71,13 +71,13 @@ def createPivo(request):
                                         token=token,
                                         fazenda=Fazenda.objects.get(pk=data['fazenda_id']),
                                         tipo=data['tipo'])
-    return JsonResponse({'id': pivo.id}, status=status.HTTP_201_CREATED)
+    return JsonResponse({'id': pivo.id}, status=201)
 
 
 def deletePivo(request, pivo_id):
     pivo = PivoIrrigacao.objects.get(pk=pivo_id)
     pivo.delete()
-    return JsonResponse({}, status=status.HTTP_204_NO_CONTENT)
+    return JsonResponse({}, status=204)
 
 
 def getAllPivos(request):
@@ -102,19 +102,19 @@ def createEvento(request):
                                             duracao=duracao,
                                             data_hora_inicio=data_inicial)
     onOffPivo(request, pivo.token, evento.id)
-    return JsonResponse({'id': evento.id}, status=status.HTTP_201_CREATED)
+    return JsonResponse({'id': evento.id}, status=201)
 
 
 def deleteEvento(request, evento_id):
     evento = EventoIrrigacao.objects.get(pk=evento_id)
     evento.delete()
-    return JsonResponse({}, status=status.HTTP_204_NO_CONTENT)
+    return JsonResponse({}, status=204)
 
 
 def updateEventoIrrigacao(request, id):
     data = json.loads(request.body)
     evento = EventoIrrigacao.objects.filter(id=id).update(status=data['status'])
-    return JsonResponse({'id': evento.id}, status=status.HTTP_201_CREATED)
+    return JsonResponse({'id': evento.id}, status=201)
 
 
 def getIrrigacaoEvento(request):
