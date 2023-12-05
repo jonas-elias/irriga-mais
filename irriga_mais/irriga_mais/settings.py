@@ -25,7 +25,7 @@ SECRET_KEY = 'wkl7+o02$jk8un!wb3i5sw=p9ck2$dqqf&!ljro6)c$6=fr*&('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.3.217', 'localhost', '127.0.0.1', 'server']
+ALLOWED_HOSTS = ['192.168.3.217', 'localhost', '127.0.0.1', 'server', 'ec2-15-228-10-221.sa-east-1.compute.amazonaws.com', '15.228.10.221']
 
 # APPEND_SLASH = False
 
