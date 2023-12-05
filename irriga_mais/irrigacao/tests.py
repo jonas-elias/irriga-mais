@@ -3,7 +3,6 @@ import json
 from datetime import datetime, timedelta
 from django.test import TestCase, RequestFactory
 from django.contrib.auth.hashers import make_password
-from django.urls import reverse
 from .models import Fazenda, PivoIrrigacao, EventoIrrigacao, TokenAuth
 from .views import onOffPivo, getAllFazendas, getFazendaById, createFazenda, loginFazenda, createPivo, deletePivo, getAllPivos, createEvento, deleteEvento, updateEventoIrrigacao, getIrrigacaoEvento
 
