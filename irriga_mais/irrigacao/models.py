@@ -24,6 +24,7 @@ class EventoIrrigacao(models.Model):
     pivo = models.ForeignKey(PivoIrrigacao, on_delete=models.CASCADE)
     data_hora_inicio = models.DateTimeField(auto_now_add=True)
     duracao = models.DurationField()
+    fazenda = models.ForeignKey(Fazenda, on_delete=models.CASCADE)
     STATUS_CHOICES = [
         ('concluido', 'Concluído'),
         ('em_andamento', 'Em Andamento'),

@@ -8,6 +8,7 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.utils import timezone
 import secrets
 from datetime import datetime, timedelta
+from django.shortcuts import get_object_or_404
 
 
 def onOffPivo(request, pivo_key, evento_id):
@@ -78,7 +79,10 @@ def deletePivo(request, pivo_id):
 
 
 def getAllPivos(request):
-    queryset = PivoIrrigacao.objects.all()
+    fazenda_id = request.headers.get('fazendaId')
+    fazenda = get_object_or_404(Fazenda, id=fazenda_id)
+
+    queryset = PivoIrrigacao.objects.all().filter(fazenda=fazenda)
     pivos = list(queryset.values())
     return JsonResponse({'response': pivos}, status=200)
 
@@ -95,7 +99,9 @@ def createEvento(request):
         data_inicial += timedelta(minutes=int(data['data_inicial']))
 
     pivo = PivoIrrigacao.objects.get(pk=data['pivo_id'])
+    fazenda = Fazenda.objects.get(pk=data['fazenda_id'])
     evento = EventoIrrigacao.objects.create(pivo=pivo,
+                                            fazenda=fazenda,
                                             duracao=duracao,
                                             data_hora_inicio=data_inicial)
     onOffPivo(request, pivo.token, evento.id)
@@ -115,7 +121,10 @@ def updateEventoIrrigacao(request, id):
 
 
 def getIrrigacaoEvento(request):
-    queryset = EventoIrrigacao.objects.select_related('pivo').all()
+    fazenda_id = request.headers.get('fazendaId')
+    fazenda = get_object_or_404(Fazenda, id=fazenda_id)
+
+    queryset = EventoIrrigacao.objects.select_related('pivo').filter(fazenda=fazenda)
 
     eventos = [
         {
