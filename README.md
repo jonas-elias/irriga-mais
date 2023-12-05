@@ -16,7 +16,7 @@ docker compose up -d
 
 ## Acessos 🌐
 1. Django app:
-http://localhost:8000
+http://localhost:8080
 
 2. Prometheus app:
 http://localhost:9090
