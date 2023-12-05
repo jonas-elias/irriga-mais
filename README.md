@@ -19,7 +19,7 @@ docker compose up -d
 http://localhost:8000
 
 2. Prometheus app:
-http://localhost:9000
+http://localhost:9090
 
 3. Grafana app:
 http://localhost:3000
